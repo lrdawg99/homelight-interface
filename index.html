@@ -319,7 +319,7 @@ html /deep/ [touch-action="manipulation"]{ -ms-touch-action: manipulation; touch
 	  	<div class="container" style="width: 100%">
 	  		<div class="col-md-4">
 				<div class="card center">
-			      <paper-ripple class="recenteringTouch" fit=""></paper-ripple>
+			      <paper-ripple class="recenteringTouch lights-on" fit=""></paper-ripple>
 			      <span class="buttonContent">
 			      	<img class="buttonIconOn" src="./graphics/bulb2.png"/>
 			      </span>
@@ -327,7 +327,7 @@ html /deep/ [touch-action="manipulation"]{ -ms-touch-action: manipulation; touch
 			 </div>
 			 <div class="col-md-4">
 			    <div class="card center">
-			      <paper-ripple class="recenteringTouch" fit=""></paper-ripple>
+			      <paper-ripple class="recenteringTouch  lights-off" fit=""></paper-ripple>
 			      <span class="buttonContent">
 			      	<img class="buttonIconOff" src="./graphics/bulb1.png"/>
 			      </span>
@@ -335,7 +335,7 @@ html /deep/ [touch-action="manipulation"]{ -ms-touch-action: manipulation; touch
 			 </div>
 			 <div class="col-md-4">
 			    <div class="card center">
-			      <paper-ripple class="recenteringTouch" fit=""></paper-ripple>
+			      <paper-ripple class="recenteringTouch  sunny-day" fit=""></paper-ripple>
 			      <span class="buttonContent">
 			      	<img class="buttonIconSun" src="./graphics/sunIcon.png"/>
 			      </span>
@@ -357,6 +357,9 @@ html /deep/ [touch-action="manipulation"]{ -ms-touch-action: manipulation; touch
 
 
   </body>
+  <script src="//code.jquery.com/jquery-1.11.2.min.js"></script>
+<script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+
   <script type="text/javascript">
             // This function gets the current time and injects it into the DOM
             function updateClock() {
@@ -382,6 +385,45 @@ html /deep/ [touch-action="manipulation"]{ -ms-touch-action: manipulation; touch
                 // Sets the elements inner HTML value to our clock data
                 elem.innerHTML = hours + ':' + minutes;
             }
+
+            $('.lights-on').click(function() {
+            	$.ajax({
+				  url: 'http://152.3.3.209:3000/api/systemstate/',
+				  data: 'state=on',
+				  type: 'POST',
+				  success: function(data) {
+				  	//alert(data);
+				  }
+				}).error(function(request, status, error) {
+					alert(request.responseText);
+				});
+            });
+
+            $('.lights-off').click(function() {
+            	$.ajax({
+				  url: 'http://152.3.3.209:3000/api/systemstate/',
+				  data: 'state=off',
+				  type: 'POST',
+				  success: function(data) {
+				  	//alert(data);
+				  }
+				}).error(function(request, status, error) {
+					alert(request.responseText);
+				});
+            });
+
+            $('.sunny-day').click(function() {
+            	$.ajax({
+				  url: 'http://152.3.3.209:3000/api/systemstate/',
+				  data: 'state=demo',
+				  type: 'POST',
+				  success: function(data) {
+				  	//alert(data);
+				  }
+				}).error(function(request, status, error) {
+					alert(request.responseText);
+				});
+            });
         </script>
 
 </html>
